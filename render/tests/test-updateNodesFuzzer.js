@@ -134,7 +134,7 @@ function fuzzTest(delMax, movMax, insMax) {
 		var newPos = copy.map(function(v) {
 			return list.indexOf(v)
 		}).filter(function(i) {
-			return i != -1
+			return i !== -1
 		})
 		var lis = longestIncreasingSubsequence(newPos)
 		expected.moves = copy.length - lis.length
