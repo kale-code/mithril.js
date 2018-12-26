@@ -273,7 +273,7 @@ suite.add({
 						"data-index": index,
 						title: index.toString(36)
 					},
-					m("input.dooga", {type: "checkbox", checked: index % 3 == 0}),
+					m("input.dooga", {type: "checkbox", checked: index % 3 === 0}),
 					m("input", {value: "test " + (Math.floor(index / 4)), disabled: index % 10 ? null : true}),
 					m("div", {class: get(classes, index * 11)},
 						m("p", {style: get(styles, index)}, "p1"),
