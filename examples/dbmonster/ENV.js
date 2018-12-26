@@ -152,18 +152,20 @@ var ENV = ENV || (function() {
       oldData = data;
     }
     for (var i in data) {
-      var row = data[i];
-      if (!keepIdentity && oldData && oldData[i]) {
-        row.lastSample = oldData[i].lastSample;
-      }
-      if (!row.lastSample || Math.random() < ENV.mutations()) {
-        counter = counter + 1;
-        if (!keepIdentity) {
-          row.lastSample = null;
+      if (data.hasOwnProperty(i)) {
+        var row = data[i];
+        if (!keepIdentity && oldData && oldData[i]) {
+          row.lastSample = oldData[i].lastSample;
         }
-        generateRow(row, keepIdentity, counter);
-      } else {
-        data[i] = oldData[i];
+        if (!row.lastSample || Math.random() < ENV.mutations()) {
+          counter = counter + 1;
+          if (!keepIdentity) {
+            row.lastSample = null;
+          }
+          generateRow(row, keepIdentity, counter);
+        } else {
+          data[i] = oldData[i];
+        }
       }
     }
     first = false;
