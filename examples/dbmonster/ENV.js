@@ -105,11 +105,13 @@ var ENV = ENV || (function() {
         }
       }
       for (var j in object.lastSample.queries) {
-        var value = object.lastSample.queries[j];
-        if (j <= nbQueries) {
-          updateQuery(value);
-        } else {
-          cleanQuery(value);
+        if (object.lastSample.queries.hasOwnProperty(j)) {
+          var value = object.lastSample.queries[j];
+          if (j <= nbQueries) {
+            updateQuery(value);
+          } else {
+            cleanQuery(value);
+          }
         }
       }
     } else {
