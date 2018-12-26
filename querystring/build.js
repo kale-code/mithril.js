@@ -20,7 +20,9 @@ module.exports = function(object) {
 		}
 		else if (Object.prototype.toString.call(value) === "[object Object]") {
 			for (var i in value) {
-				destructure(key + "[" + i + "]", value[i])
+				if (value.hasOwnProperty(i)) {
+                    destructure(key + "[" + i + "]", value[i])
+                }
 			}
 		}
 		else args.push(encodeURIComponent(key) + (value != null && value !== "" ? "=" + encodeURIComponent(value) : ""))
