@@ -5,7 +5,9 @@ module.exports = function(object) {
 
 	var args = []
 	for (var key in object) {
-		destructure(key, object[key])
+		if (object.hasOwnProperty(var key)) {
+            destructure(key, object[key])
+        }
 	}
 
 	return args.join("&")
