@@ -86,20 +86,22 @@ module.exports = function($window) {
 				for (var k in state) params[k] = state[k]
 			}
 			for (var route in routes) {
-				var matcher = new RegExp("^" + route.replace(/:[^\/]+?\.{3}/g, "(.*?)").replace(/:[^\/]+/g, "([^\\/]+)") + "\/?$")
-
-				if (matcher.test(pathname)) {
-					pathname.replace(matcher, function() {
-						var keys = route.match(/:[^\/]+/g) || []
-						var values = [].slice.call(arguments, 1, -2)
-						for (var i = 0; i < keys.length; i++) {
-							params[keys[i].replace(/:|\./g, "")] = decodeURIComponent(values[i])
-						}
-						resolve(routes[route], params, path, route)
-					})
-					return
-				}
-			}
+                if (routes.hasOwnProperty(route)) {
+    				var matcher = new RegExp("^" + route.replace(/:[^\/]+?\.{3}/g, "(.*?)").replace(/:[^\/]+/g, "([^\\/]+)") + "\/?$")
+    
+    				if (matcher.test(pathname)) {
+    					pathname.replace(matcher, function() {
+    						var keys = route.match(/:[^\/]+/g) || []
+    						var values = [].slice.call(arguments, 1, -2)
+    						for (var i = 0; i < keys.length; i++) {
+    							params[keys[i].replace(/:|\./g, "")] = decodeURIComponent(values[i])
+    						}
+    						resolve(routes[route], params, path, route)
+    					})
+    					return
+    				}
+    			}
+            }
 
 			reject(path, params)
 		}
