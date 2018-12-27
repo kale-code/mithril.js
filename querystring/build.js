@@ -6,8 +6,8 @@ module.exports = function(object) {
 	var args = []
 	for (var key in object) {
 		if (object.hasOwnProperty(key)) {
-            destructure(key, object[key])
-        }
+			destructure(key, object[key])
+		}
 	}
 
 	return args.join("&")
@@ -21,8 +21,8 @@ module.exports = function(object) {
 		else if (Object.prototype.toString.call(value) === "[object Object]") {
 			for (var i in value) {
 				if (value.hasOwnProperty(i)) {
-                    destructure(key + "[" + i + "]", value[i])
-                }
+					destructure(key + "[" + i + "]", value[i])
+				}
 			}
 		}
 		else args.push(encodeURIComponent(key) + (value != null && value !== "" ? "=" + encodeURIComponent(value) : ""))
